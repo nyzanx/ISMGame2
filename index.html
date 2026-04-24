@@ -4,9 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1920">
 <title>Spin The Chain — Heizen · ISM World 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   HEIZEN BRAND FONTS — self-hosted (Axiforma) + Google (Inria Serif)
+   ================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Thin.ttf")         format("truetype"); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-ThinItalic.ttf")   format("truetype"); font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Light.ttf")        format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-LightItalic.ttf")  format("truetype"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Regular.ttf")      format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Italic.ttf")       format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Medium.ttf")       format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-MediumItalic.ttf") format("truetype"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-SemiBold.ttf")     format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-SemiBoldItalic.ttf") format("truetype"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Bold.ttf")         format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-BoldItalic.ttf")   format("truetype"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-ExtraBold.ttf")    format("truetype"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-ExtraBoldItalic.ttf") format("truetype"); font-weight: 800; font-style: italic; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Heavy.ttf")        format("truetype"); font-weight: 850; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("fonts/Axiforma-Black.ttf")        format("truetype"); font-weight: 900; font-style: normal; font-display: swap; }
+
+@font-face { font-family: "Inria Serif"; src: url("fonts/InriaSerif-Regular.ttf")    format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inria Serif"; src: url("fonts/InriaSerif-Italic.ttf")     format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inria Serif"; src: url("fonts/InriaSerif-Bold.ttf")       format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inria Serif"; src: url("fonts/InriaSerif-BoldItalic.ttf") format("truetype"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inria Serif"; src: url("fonts/InriaSerif-Light.ttf")      format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inria Serif"; src: url("fonts/InriaSerif-LightItalic.ttf") format("truetype"); font-weight: 300; font-style: italic; font-display: swap; }
+
+/* Design system tokens */
+:root {
+  --font-display: "Inria Serif", Georgia, "Times New Roman", serif;
+  --font-body:    "Axiforma", "Helvetica Neue", Arial, sans-serif;
+  --heizen-teal-brand: #5C95A8; /* Dusty Teal — logo accent */
+}
+</style>
 <style>
 /* ================================================================
    BASE RESET & VARIABLES
@@ -14,17 +48,17 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:         #0A0F1E;
-  --teal:       #1D9E75;
-  --teal-dark:  #136B4E;
-  --teal-mid:   #1A8A65;
-  --teal-light: #25C492;
+  --bg:         #2A2A2A;
+  --teal:       #5C95A8;
+  --teal-dark:  #2A4A56;
+  --teal-mid:   #5C95A8;
+  --teal-light: #ACCBD2;
   --alert:      #E85D3A;
-  --navy:       #0A2744;
-  --navy-mid:   #0D3566;
-  --gold:       #F5C518;
+  --navy:       #1E3340;
+  --navy-mid:   #233A50;
+  --gold:       #E2D4C4;
   --white:      #FFFFFF;
-  --gray:       #8892A4;
+  --gray:       #7A7A7A;
 }
 
 html, body {
@@ -33,7 +67,7 @@ html, body {
   overflow: hidden;
   background: var(--bg);
   color: var(--white);
-  font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+  font-family: 'Axiforma', 'Helvetica Neue', system-ui, sans-serif;
   user-select: none;
   cursor: default;
 }
@@ -63,8 +97,8 @@ html, body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(29,158,117,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29,158,117,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(92,149,168,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(92,149,168,0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
@@ -77,23 +111,23 @@ html, body {
   position: absolute;
   top: 28px;
   left: 40px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   z-index: 50;
 }
-.logo-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--white);
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 /* ================================================================
    TYPOGRAPHY UTILITIES
    ================================================================ */
-.sg { font-family: 'Space Grotesk', sans-serif; }
+/* .sg — Inria Serif Bold Italic: brand headings / display text */
+.sg {
+  font-family: 'Inria Serif', Georgia, serif;
+  font-weight: 700;
+  font-style: italic;
+}
 
 /* ================================================================
    SCREEN 1 — ATTRACT
@@ -108,8 +142,8 @@ html, body {
 }
 .metric-widget {
   position: absolute;
-  background: rgba(29,158,117,0.07);
-  border: 1px solid rgba(29,158,117,0.18);
+  background: rgba(92,149,168,0.07);
+  border: 1px solid rgba(92,149,168,0.18);
   border-radius: 8px;
   padding: 14px 20px;
   min-width: 210px;
@@ -122,7 +156,7 @@ html, body {
   50%     { transform: translateY(-6px); }
 }
 .mw-label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 11px;
   color: var(--teal);
   text-transform: uppercase;
@@ -130,7 +164,7 @@ html, body {
   margin-bottom: 6px;
 }
 .mw-value {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 30px;
   font-weight: 700;
   color: var(--white);
@@ -148,9 +182,10 @@ html, body {
   margin-top: -50px;
 }
 .attract-headline {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 76px;
+  font-family: 'Inria Serif', Georgia, serif;
   font-weight: 700;
+  font-style: italic;
+  font-size: 76px;
   text-align: center;
   min-height: 190px;
   display: flex;
@@ -175,7 +210,7 @@ html, body {
 .attract-spin-btn {
   background: var(--teal);
   color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 36px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -188,8 +223,8 @@ html, body {
 }
 .attract-spin-btn:hover { transform: scale(1.05); }
 @keyframes btnPulse {
-  0%,100% { box-shadow: 0 0 30px rgba(29,158,117,0.4); }
-  50%     { box-shadow: 0 0 70px rgba(29,158,117,0.8), 0 0 140px rgba(29,158,117,0.25); }
+  0%,100% { box-shadow: 0 0 30px rgba(92,149,168,0.4); }
+  50%     { box-shadow: 0 0 70px rgba(92,149,168,0.8), 0 0 140px rgba(92,149,168,0.25); }
 }
 
 .attract-lb {
@@ -197,14 +232,14 @@ html, body {
   top: 80px;
   right: 44px;
   width: 390px;
-  background: rgba(10,39,68,0.65);
-  border: 1px solid rgba(29,158,117,0.28);
+  background: rgba(30,51,64,0.65);
+  border: 1px solid rgba(92,149,168,0.28);
   border-radius: 8px;
   padding: 24px 28px;
   z-index: 10;
 }
 .attract-lb-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--teal);
@@ -220,19 +255,20 @@ html, body {
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .attract-lb-row:last-child { border-bottom: none; }
-.attract-lb-rank  { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--teal); width: 28px; flex-shrink: 0; }
+.attract-lb-rank  { font-family: 'Axiforma', sans-serif; font-size: 20px; font-weight: 700; color: var(--teal); width: 28px; flex-shrink: 0; }
 .attract-lb-info  { flex: 1; overflow: hidden; }
 .attract-lb-name  { font-size: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .attract-lb-co    { font-size: 13px; color: var(--gray); }
-.attract-lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+.attract-lb-score { font-family: 'Axiforma', sans-serif; font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
 
 /* ================================================================
    SCREEN 2 — REGISTRATION
    ================================================================ */
 .reg-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 62px;
+  font-family: 'Inria Serif', Georgia, serif;
   font-weight: 700;
+  font-style: italic;
+  font-size: 62px;
   text-align: center;
   margin-bottom: 12px;
   position: relative;
@@ -244,7 +280,7 @@ html, body {
 .reg-form { width: 820px; display: flex; flex-direction: column; gap: 22px; position: relative; z-index: 1; }
 .form-group { display: flex; flex-direction: column; gap: 8px; }
 .form-label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--teal);
@@ -252,11 +288,11 @@ html, body {
   letter-spacing: 2.5px;
 }
 .form-input, .form-select {
-  background: rgba(10,39,68,0.55);
-  border: 2px solid rgba(29,158,117,0.28);
+  background: rgba(30,51,64,0.55);
+  border: 2px solid rgba(92,149,168,0.28);
   border-radius: 4px;
   color: var(--white);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 30px;
   padding: 18px 26px;
   outline: none;
@@ -265,16 +301,16 @@ html, body {
 }
 .form-input:focus, .form-select:focus {
   border-color: var(--teal);
-  background: rgba(10,39,68,0.9);
+  background: rgba(30,51,64,0.9);
 }
 .form-input::placeholder { color: rgba(255,255,255,0.28); }
-.form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%231D9E75' d='M5 7l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 20px center; }
-.form-select option { background: #0A1F35; color: var(--white); font-size: 24px; }
+.form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%235C95A8' d='M5 7l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 20px center; }
+.form-select option { background: #1A2A30; color: var(--white); font-size: 24px; }
 
 .reg-cta {
   background: var(--teal);
   color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 36px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -311,17 +347,17 @@ html, body {
 .spin-right { display: flex; flex-direction: column; gap: 22px; min-width: 440px; position: relative; z-index: 1; }
 
 .spin-player {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 26px;
   font-weight: 600;
   color: var(--teal);
   text-align: center;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(29,158,117,0.2);
+  border-bottom: 1px solid rgba(92,149,168,0.2);
   width: 100%;
 }
 .spin-counter {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 22px;
   color: var(--gray);
   text-transform: uppercase;
@@ -348,7 +384,7 @@ html, body {
 .spin-btn {
   background: var(--teal);
   color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 44px;
   font-weight: 700;
   letter-spacing: 4px;
@@ -362,17 +398,17 @@ html, body {
 .spin-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
 .score-panel {
-  background: rgba(10,39,68,0.8);
-  border: 1px solid rgba(29,158,117,0.28);
+  background: rgba(30,51,64,0.8);
+  border: 1px solid rgba(92,149,168,0.28);
   border-radius: 8px;
   padding: 24px 32px;
 }
-.score-panel-label { font-family: 'Space Grotesk', sans-serif; font-size: 14px; color: var(--teal); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; }
-.score-panel-value { font-family: 'Space Grotesk', sans-serif; font-size: 80px; font-weight: 700; color: var(--white); line-height: 1; }
+.score-panel-label { font-family: 'Axiforma', sans-serif; font-size: 14px; color: var(--teal); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; }
+.score-panel-value { font-family: 'Axiforma', sans-serif; font-size: 80px; font-weight: 700; color: var(--white); line-height: 1; }
 
 .spin-history { display: flex; flex-direction: column; gap: 10px; min-height: 100px; }
 .history-item {
-  background: rgba(10,39,68,0.5);
+  background: rgba(30,51,64,0.5);
   border-left: 3px solid var(--teal);
   padding: 10px 18px;
   border-radius: 0 4px 4px 0;
@@ -381,7 +417,7 @@ html, body {
   align-items: center;
   font-size: 19px;
 }
-.history-pts { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 24px; }
+.history-pts { font-family: 'Axiforma', sans-serif; font-weight: 700; font-size: 24px; }
 .history-pts.ok   { color: var(--teal); }
 .history-pts.bad  { color: var(--alert); }
 .history-pts.wild { color: var(--gold); }
@@ -392,7 +428,7 @@ html, body {
 
 @keyframes wheelFlash {
   0%,100% { box-shadow: none; }
-  33%,66% { box-shadow: 0 0 60px rgba(29,158,117,0.7), inset 0 0 40px rgba(29,158,117,0.3); }
+  33%,66% { box-shadow: 0 0 60px rgba(92,149,168,0.7), inset 0 0 40px rgba(92,149,168,0.3); }
 }
 .wheel-flash { animation: wheelFlash 0.9s ease; border-radius: 50%; }
 
@@ -429,7 +465,7 @@ html, body {
   position: absolute;
   top: 44px;
   right: 80px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 64px;
   font-weight: 700;
   color: var(--alert);
@@ -439,7 +475,7 @@ html, body {
 @keyframes timerUrgent { from { opacity: 1; } to { opacity: 0.35; } }
 
 .q-segment-label {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: var(--teal);
@@ -450,9 +486,10 @@ html, body {
   z-index: 1;
 }
 .q-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 42px;
+  font-family: 'Inria Serif', Georgia, serif;
   font-weight: 700;
+  font-style: italic;
+  font-size: 42px;
   color: var(--white);
   line-height: 1.25;
   max-width: 1700px;
@@ -472,8 +509,8 @@ html, body {
   z-index: 1;
 }
 .answer-card {
-  background: rgba(10,39,68,0.65);
-  border: 2px solid rgba(29,158,117,0.18);
+  background: rgba(30,51,64,0.65);
+  border: 2px solid rgba(92,149,168,0.18);
   border-radius: 8px;
   padding: 26px 30px;
   cursor: pointer;
@@ -485,11 +522,11 @@ html, body {
 }
 .answer-card:hover:not(.locked) {
   border-color: var(--teal);
-  background: rgba(29,158,117,0.12);
+  background: rgba(92,149,168,0.12);
   transform: scale(1.01);
 }
 .answer-letter {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 34px;
   font-weight: 700;
   color: var(--teal);
@@ -498,7 +535,7 @@ html, body {
 .answer-text { font-size: 28px; font-weight: 500; line-height: 1.3; }
 
 .answer-card.locked { cursor: not-allowed; }
-.answer-card.is-correct { border-color: var(--teal) !important; background: rgba(29,158,117,0.22) !important; animation: correctFlash 0.4s ease; }
+.answer-card.is-correct { border-color: var(--teal) !important; background: rgba(92,149,168,0.22) !important; animation: correctFlash 0.4s ease; }
 .answer-card.is-wrong   { border-color: var(--alert) !important; background: rgba(232,93,58,0.18) !important; }
 .answer-card.faded      { opacity: 0.3; }
 @keyframes correctFlash {
@@ -513,20 +550,21 @@ html, body {
 #screen-wildcard { gap: 44px; }
 
 .wc-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 96px;
+  font-family: 'Inria Serif', Georgia, serif;
   font-weight: 700;
+  font-style: italic;
+  font-size: 96px;
   text-align: center;
   position: relative;
   z-index: 1;
   animation: wcGlow 1.6s ease-in-out infinite alternate;
 }
 @keyframes wcGlow {
-  from { text-shadow: 0 0 40px rgba(245,197,24,0.5); }
-  to   { text-shadow: 0 0 90px rgba(245,197,24,1), 0 0 180px rgba(245,197,24,0.3); }
+  from { text-shadow: 0 0 40px rgba(92,149,168,0.5); }
+  to   { text-shadow: 0 0 90px rgba(92,149,168,1), 0 0 180px rgba(92,149,168,0.3); }
 }
 .wc-sub {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 36px;
   text-align: center;
   color: rgba(255,255,255,0.85);
@@ -544,13 +582,13 @@ html, body {
   z-index: 1;
 }
 .wc-tile {
-  background: rgba(10,39,68,0.65);
+  background: rgba(30,51,64,0.65);
   border: 2px solid rgba(255,255,255,0.12);
   border-radius: 12px;
   padding: 38px 40px;
   cursor: pointer;
   text-align: center;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 30px;
   font-weight: 600;
   display: flex;
@@ -560,8 +598,8 @@ html, body {
   min-height: 116px;
   transition: border-color 0.2s, background 0.2s, transform 0.15s;
 }
-.wc-tile:hover  { border-color: var(--gold); background: rgba(245,197,24,0.1); transform: scale(1.04); }
-.wc-tile.chosen { border-color: var(--gold); background: rgba(245,197,24,0.18); }
+.wc-tile:hover  { border-color: var(--teal); background: rgba(92,149,168,0.12); transform: scale(1.04); }
+.wc-tile.chosen { border-color: var(--teal); background: rgba(92,149,168,0.2); }
 
 /* ================================================================
    GLOBAL FIELD REPORT OVERLAY
@@ -591,18 +629,18 @@ html, body {
   from { transform: translateX(70px); opacity: 0; }
   to   { transform: translateX(0); opacity: 1; }
 }
-.fr-badge { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 10px; }
-.fr-result { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 700; margin-bottom: 18px; }
-.fr-result.ok   { color: #4AE0A0; }
+.fr-badge { font-family: 'Axiforma', sans-serif; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 10px; }
+.fr-result { font-family: 'Inria Serif', Georgia, serif; font-weight: 700; font-style: italic; font-size: 54px; margin-bottom: 18px; }
+.fr-result.ok   { color: #ACCBD2; }
 .fr-result.bad  { color: var(--alert); }
 .fr-result.wild { color: var(--gold); }
-.fr-pts { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; padding: 14px 22px; background: rgba(0,0,0,0.22); border-radius: 6px; margin-bottom: 28px; }
+.fr-pts { display: inline-block; font-family: 'Axiforma', sans-serif; font-size: 30px; font-weight: 700; padding: 14px 22px; background: rgba(0,0,0,0.22); border-radius: 6px; margin-bottom: 28px; }
 .fr-text { font-size: 25px; line-height: 1.72; color: rgba(255,255,255,0.88); margin-bottom: 38px; }
 .fr-next {
   display: none;
   background: var(--white);
   color: var(--teal-dark);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 28px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -617,73 +655,120 @@ html, body {
 /* ================================================================
    SCREEN 5 — RESULTS
    ================================================================ */
-#screen-results { padding: 28px 100px; gap: 20px; }
+/* Results screen — fixed 1080px, single-column, tight gaps */
+#screen-results {
+  padding: 20px 120px 24px;
+  gap: 0;
+  justify-content: flex-start;
+}
 
+/* Top strip: headline left, score+rank right */
+.results-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1680px;
+  padding: 24px 0 20px;
+  border-bottom: 1px solid rgba(92,149,168,0.2);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
 .results-headline {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 56px;
+  font-family: 'Inria Serif', Georgia, serif;
   font-weight: 700;
-  text-align: center;
+  font-style: italic;
+  font-size: 48px;
   color: var(--teal);
   line-height: 1.2;
-  max-width: 1400px;
+  max-width: 900px;
   white-space: pre-line;
+}
+.results-score-block {
+  text-align: right;
+  flex-shrink: 0;
+}
+.results-score-label { font-family: 'Axiforma', sans-serif; font-size: 16px; color: var(--gray); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 2px; }
+.results-score-num   { font-family: 'Axiforma', sans-serif; font-size: 96px; font-weight: 700; color: var(--white); line-height: 1; }
+.results-rank        { font-family: 'Axiforma', sans-serif; font-size: 24px; color: var(--gold); text-align: right; margin-top: 4px; }
+
+/* Middle: prize + meaning side by side */
+.results-mid {
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+  width: 100%;
+  max-width: 1680px;
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
-.results-score-wrap { text-align: center; position: relative; z-index: 1; }
-.results-score-label { font-family: 'Space Grotesk', sans-serif; font-size: 20px; color: var(--gray); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4px; }
-.results-score-num   { font-family: 'Space Grotesk', sans-serif; font-size: 116px; font-weight: 700; color: var(--white); line-height: 1; }
-.results-rank { font-family: 'Space Grotesk', sans-serif; font-size: 28px; color: var(--gold); text-align: center; position: relative; z-index: 1; }
-
 .prize-box {
-  background: rgba(29,158,117,0.1);
+  background: rgba(92,149,168,0.1);
   border: 2px solid var(--teal);
   border-radius: 8px;
-  padding: 22px 48px;
+  padding: 22px 36px;
   text-align: center;
-  max-width: 1000px;
-  width: 100%;
-  position: relative;
-  z-index: 1;
+  flex: 0 0 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.prize-main { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 6px; }
-.prize-sub  { font-size: 21px; color: rgba(255,255,255,0.7); }
+.prize-main { font-family: 'Inria Serif', Georgia, serif; font-weight: 700; font-style: italic; font-size: 28px; margin-bottom: 6px; }
+.prize-sub  { font-size: 19px; color: rgba(255,255,255,0.7); }
 
-.results-meaning { font-size: 24px; color: rgba(255,255,255,0.72); text-align: center; max-width: 1250px; line-height: 1.55; position: relative; z-index: 1; }
+.results-meaning {
+  font-size: 22px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(30,51,64,0.4);
+  border: 1px solid rgba(92,149,168,0.12);
+  border-radius: 8px;
+  padding: 20px 28px;
+}
 
+/* Bottom CTA — full width, teal */
 .results-cta {
   background: var(--teal);
   border-radius: 8px;
-  padding: 28px 80px;
+  padding: 28px 60px;
   text-align: center;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 60px;
-  max-width: 1400px;
+  gap: 52px;
   width: 100%;
+  max-width: 1680px;
+  margin-bottom: 20px;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
 }
-.results-cta-main { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; margin-bottom: 6px; }
-.results-cta-sub  { font-size: 24px; color: rgba(255,255,255,0.8); }
+.results-cta-main { font-family: 'Inria Serif', Georgia, serif; font-weight: 700; font-style: italic; font-size: 34px; margin-bottom: 6px; }
+.results-cta-sub  { font-size: 22px; color: rgba(255,255,255,0.85); }
 
 .qr-placeholder {
-  width: 120px; height: 120px;
+  width: 110px; height: 110px;
   background: var(--white);
   border-radius: 6px;
   flex-shrink: 0;
   overflow: hidden;
 }
 
-.results-btns { display: flex; gap: 24px; justify-content: center; position: relative; z-index: 1; }
+.results-btns { display: flex; gap: 24px; justify-content: center; position: relative; z-index: 1; flex-shrink: 0; }
 .btn-ghost {
   background: transparent;
   border: 2px solid rgba(255,255,255,0.28);
   color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 26px;
   font-weight: 600;
   padding: 18px 48px;
@@ -696,7 +781,7 @@ html, body {
   background: var(--teal);
   border: 2px solid var(--teal);
   color: var(--white);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 26px;
   font-weight: 700;
   padding: 18px 48px;
@@ -711,7 +796,7 @@ html, body {
    ================================================================ */
 #screen-leaderboard { padding: 50px 100px; gap: 28px; justify-content: flex-start; }
 
-.lb-title { font-family: 'Space Grotesk', sans-serif; font-size: 58px; font-weight: 700; color: var(--teal); text-align: center; letter-spacing: 2px; position: relative; z-index: 1; }
+.lb-title { font-family: 'Inria Serif', Georgia, serif; font-weight: 700; font-style: italic; font-size: 58px; color: var(--teal); text-align: center; letter-spacing: 0; position: relative; z-index: 1; }
 .lb-sub   { font-size: 22px; color: var(--gray); text-align: center; position: relative; z-index: 1; }
 
 .lb-table { width: 100%; max-width: 1500px; position: relative; z-index: 1; }
@@ -720,12 +805,12 @@ html, body {
   grid-template-columns: 90px 1fr 1fr 140px 260px;
   gap: 16px;
   padding: 14px 24px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Axiforma', sans-serif;
   font-size: 14px;
   color: var(--teal);
   text-transform: uppercase;
   letter-spacing: 2.5px;
-  border-bottom: 1px solid rgba(29,158,117,0.3);
+  border-bottom: 1px solid rgba(92,149,168,0.3);
   margin-bottom: 6px;
 }
 .lb-row {
@@ -733,8 +818,8 @@ html, body {
   grid-template-columns: 90px 1fr 1fr 140px 260px;
   gap: 16px;
   padding: 18px 24px;
-  background: rgba(10,39,68,0.38);
-  border: 1px solid rgba(29,158,117,0.08);
+  background: rgba(30,51,64,0.38);
+  border: 1px solid rgba(92,149,168,0.08);
   border-radius: 6px;
   margin-bottom: 7px;
   opacity: 0;
@@ -742,12 +827,12 @@ html, body {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .lb-row.in { opacity: 1; transform: translateX(0); }
-.lb-row:first-child { border-color: rgba(245,197,24,0.35); background: rgba(245,197,24,0.05); }
-.lb-rank  { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--teal); }
+.lb-row:first-child { border-color: rgba(226,212,196,0.35); background: rgba(226,212,196,0.05); }
+.lb-rank  { font-family: 'Axiforma', sans-serif; font-size: 30px; font-weight: 700; color: var(--teal); }
 .lb-rank.gold { color: var(--gold); }
 .lb-name  { font-size: 24px; font-weight: 600; align-self: center; }
 .lb-co    { font-size: 20px; color: var(--gray); align-self: center; }
-.lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--gold); text-align: right; align-self: center; }
+.lb-score { font-family: 'Axiforma', sans-serif; font-size: 30px; font-weight: 700; color: var(--gold); text-align: right; align-self: center; }
 .lb-seg   { font-size: 17px; color: var(--teal); align-self: center; }
 .lb-footer { font-size: 19px; color: var(--gray); text-align: center; position: relative; z-index: 1; }
 
@@ -774,18 +859,12 @@ html, body {
 <div id="screen-attract" class="screen">
   <div class="grid-bg"></div>
 
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
-  </div>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
 
   <div class="metrics-layer" id="metrics-layer"></div>
 
   <div class="attract-lb">
-    <div class="attract-lb-title">⚡ Top Players Today</div>
+    <div class="attract-lb-title">Top Players Today</div>
     <div id="attract-lb-list"></div>
   </div>
 
@@ -803,13 +882,7 @@ html, body {
      ============================================================ -->
 <div id="screen-register" class="screen">
   <div class="grid-bg"></div>
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
-  </div>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
 
   <div class="reg-title">BEFORE WE <span>SPIN</span></div>
   <div class="reg-sub">Tell us who's playing</div>
@@ -845,13 +918,7 @@ html, body {
      ============================================================ -->
 <div id="screen-spin" class="screen">
   <div class="grid-bg"></div>
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
-  </div>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
 
   <div class="spin-left">
     <div class="spin-player" id="spin-player-label">—</div>
@@ -884,13 +951,7 @@ html, body {
      ============================================================ -->
 <div id="screen-question" class="screen">
   <div class="grid-bg"></div>
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
-  </div>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
 
   <div class="q-timer-num" id="q-timer-num">15</div>
 
@@ -908,21 +969,15 @@ html, body {
      ============================================================ -->
 <div id="screen-wildcard" class="screen">
   <div class="grid-bg"></div>
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
-  </div>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
 
-  <div class="wc-title">⚡ YOUR TURN.</div>
+  <div class="wc-title">YOUR TURN.</div>
   <div class="wc-sub">What's the one supply chain problem<br>costing your team the most right now?</div>
   <div class="wc-tiles">
-    <div class="wc-tile" onclick="pickWildcard(0)">🔴 Visibility &amp; OTIF</div>
-    <div class="wc-tile" onclick="pickWildcard(1)">🟡 Forecast Accuracy</div>
-    <div class="wc-tile" onclick="pickWildcard(2)">🔵 Procurement Cycle</div>
-    <div class="wc-tile" onclick="pickWildcard(3)">⚪ Data &amp; Reporting</div>
+    <div class="wc-tile" onclick="pickWildcard(0)">Visibility &amp; OTIF</div>
+    <div class="wc-tile" onclick="pickWildcard(1)">Forecast Accuracy</div>
+    <div class="wc-tile" onclick="pickWildcard(2)">Procurement Cycle</div>
+    <div class="wc-tile" onclick="pickWildcard(3)">Data &amp; Reporting</div>
   </div>
 </div>
 
@@ -931,34 +986,32 @@ html, body {
      ============================================================ -->
 <div id="screen-results" class="screen">
   <div class="grid-bg"></div>
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
+
+  <!-- Top: headline left, score+rank right -->
+  <div class="results-top">
+    <div class="results-headline" id="results-headline">SUPPLY CHAIN EXPERT.</div>
+    <div class="results-score-block">
+      <div class="results-score-label">Final Score</div>
+      <div class="results-score-num" id="results-score-num">0</div>
+      <div class="results-rank" id="results-rank">You ranked #1 today</div>
+    </div>
   </div>
 
-  <div class="results-headline" id="results-headline">SUPPLY CHAIN EXPERT.</div>
-
-  <div class="results-score-wrap">
-    <div class="results-score-label">Final Score</div>
-    <div class="results-score-num" id="results-score-num">0</div>
+  <!-- Middle: prize + meaning -->
+  <div class="results-mid">
+    <div class="prize-box">
+      <div class="prize-main" id="prize-main">Thanks for playing.</div>
+      <div class="prize-sub" id="prize-sub">Visit us at Booth 60S.</div>
+    </div>
+    <div class="results-meaning" id="results-meaning"></div>
   </div>
 
-  <div class="results-rank" id="results-rank">You ranked #1 today</div>
-
-  <div class="prize-box">
-    <div class="prize-main" id="prize-main">🎁 You've won a hand warmer.</div>
-    <div class="prize-sub" id="prize-sub">Pick it up at the booth.</div>
-  </div>
-
-  <div class="results-meaning" id="results-meaning"></div>
-
+  <!-- Bottom CTA -->
   <div class="results-cta">
     <div>
       <div class="results-cta-main">Want to see how we fix your highest-cost problem?</div>
-      <div class="results-cta-sub">Book 20 minutes at Booth 60S &nbsp;·&nbsp; heizen.work</div>
+      <div class="results-cta-sub">Schedule a discovery call with &nbsp;<strong>Heizen</strong>&nbsp; now!</div>
     </div>
     <div class="qr-placeholder">
       <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
@@ -1003,13 +1056,7 @@ html, body {
      ============================================================ -->
 <div id="screen-leaderboard" class="screen">
   <div class="grid-bg"></div>
-  <div class="logo">
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
-    </svg>
-    <span class="logo-text">HEIZEN</span>
-  </div>
+  <div class="logo"><img src="assets/logo-wide-white.png" class="logo-img" alt="Heizen"></div>
 
   <div class="lb-title">TODAY'S SUPPLY CHAIN CHAMPIONS</div>
   <div class="lb-sub">ISM World 2026 &nbsp;·&nbsp; Booth 60S &nbsp;·&nbsp; heizen.work</div>
@@ -1043,7 +1090,7 @@ const SEGMENT_NAMES = [
   'SUPPLIER RISK',
   'PLANNING EFFICIENCY',
   'TECH DEBT',
-  '⚡ WILD CARD'
+  'WILD CARD'
 ];
 
 const WHEEL_LABELS = [
@@ -1054,15 +1101,15 @@ const WHEEL_LABELS = [
   'Supplier\nRisk',
   'Planning\nEfficiency',
   'Tech Debt',
-  '⚡ WILD\nCARD'
+  'WILD\nCARD'
 ];
 
-// Alternating dark navy / teal
+// Alternating Dusty Teal / dark graphite
 const WHEEL_COLORS = [
-  '#1D9E75','#0A2744',
-  '#1D9E75','#0A2744',
-  '#1D9E75','#0A2744',
-  '#1D9E75','#0A2744'
+  '#5C95A8','#1E3340',
+  '#5C95A8','#1E3340',
+  '#5C95A8','#1E3340',
+  '#5C95A8','#1E3340'
 ];
 
 const QUESTIONS = [
@@ -1224,10 +1271,10 @@ const METRIC_DATA = [
   { label: 'PO Delays Active',  v: () => Math.floor(180+Math.random()*50)+' orders',    d: () => '▲ '+Math.floor(Math.random()*8+2)+' this week' },
   { label: 'Inventory Days',    v: () => Math.floor(38+Math.random()*10)+' days',        d: () => '▲ '+Math.floor(Math.random()*3+1)+' over target' },
   { label: 'Forecast Accuracy', v: () => (72+Math.random()*8).toFixed(1)+'%',           d: () => '▼ '+(Math.random()*4).toFixed(1)+'% deviation' },
-  { label: 'Supplier On-Time',  v: () => (74+Math.random()*10).toFixed(1)+'%',          d: () => '⚠ '+Math.floor(Math.random()*5+1)+' flagged' },
-  { label: 'Data Latency',      v: () => Math.floor(18+Math.random()*24)+' hrs avg',    d: () => '⚠ '+Math.floor(Math.random()*3+1)+' stale feeds' },
+  { label: 'Supplier On-Time',  v: () => (74+Math.random()*10).toFixed(1)+'%',          d: () => '· '+Math.floor(Math.random()*5+1)+' flagged' },
+  { label: 'Data Latency',      v: () => Math.floor(18+Math.random()*24)+' hrs avg',    d: () => '· '+Math.floor(Math.random()*3+1)+' stale feeds' },
   { label: 'Active POs',        v: () => (1800+Math.floor(Math.random()*300)).toLocaleString(), d: () => '▲ '+Math.floor(Math.random()*60+10)+' queued' },
-  { label: 'Planning Cycle',    v: () => Math.floor(4+Math.random()*3)+' days',         d: () => '⚡ Target: 2 days' }
+  { label: 'Planning Cycle',    v: () => Math.floor(4+Math.random()*3)+' days',         d: () => 'Target: 2 days' }
 ];
 
 const METRIC_POS = [
@@ -1331,8 +1378,8 @@ function drawWheel(angle) {
 
   // Outer glow
   const grd = ctx.createRadialGradient(cx, cy, r-18, cx, cy, r+16);
-  grd.addColorStop(0, 'rgba(29,158,117,0.3)');
-  grd.addColorStop(1, 'rgba(29,158,117,0)');
+  grd.addColorStop(0, 'rgba(92,149,168,0.3)');
+  grd.addColorStop(1, 'rgba(92,149,168,0)');
   ctx.beginPath(); ctx.arc(cx, cy, r+16, 0, Math.PI*2);
   ctx.fillStyle = grd; ctx.fill();
 
@@ -1347,7 +1394,7 @@ function drawWheel(angle) {
     ctx.closePath();
     ctx.fillStyle   = WHEEL_COLORS[i];
     ctx.fill();
-    ctx.strokeStyle = '#0A0F1E';
+    ctx.strokeStyle = '#2A2A2A';
     ctx.lineWidth   = 3;
     ctx.stroke();
 
@@ -1358,7 +1405,7 @@ function drawWheel(angle) {
     ctx.textAlign = 'right';
     ctx.fillStyle = '#FFFFFF';
     const isWild = (i === 7);
-    ctx.font = `${isWild ? 'bold' : '600'} ${isWild ? 18 : 16}px "Space Grotesk", system-ui, sans-serif`;
+    ctx.font = `${isWild ? 'bold' : '600'} ${isWild ? 18 : 16}px "Axiforma", system-ui, sans-serif`;
     const lines = WHEEL_LABELS[i].split('\n');
     const lh    = 20;
     const total = lines.length * lh;
@@ -1370,10 +1417,10 @@ function drawWheel(angle) {
 
   // Center hub
   ctx.beginPath(); ctx.arc(cx, cy, 38, 0, Math.PI*2);
-  ctx.fillStyle   = '#0A0F1E'; ctx.fill();
-  ctx.strokeStyle = '#1D9E75'; ctx.lineWidth = 3; ctx.stroke();
-  ctx.fillStyle = '#1D9E75';
-  ctx.font = 'bold 26px "Space Grotesk", system-ui, sans-serif';
+  ctx.fillStyle   = '#2A2A2A'; ctx.fill();
+  ctx.strokeStyle = '#5C95A8'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.fillStyle = '#5C95A8';
+  ctx.font = 'bold 26px "Axiforma", system-ui, sans-serif';
   ctx.textAlign     = 'center';
   ctx.textBaseline  = 'middle';
   ctx.fillText('H', cx, cy);
@@ -1488,7 +1535,7 @@ function showQuestion(segIdx) {
   G.currentQ     = qObj;
   G.answerLocked = false;
 
-  document.getElementById('q-segment-label').textContent = '⚡ ' + SEGMENT_NAMES[segIdx];
+  document.getElementById('q-segment-label').textContent = SEGMENT_NAMES[segIdx];
   document.getElementById('q-text').textContent          = qObj.q;
 
   const letters = ['A','B','C','D'];
@@ -1582,7 +1629,7 @@ function showFieldReport(isCorrect, pts) {
     rEl.textContent = pts === 100 ? 'CORRECT!' : 'CORRECT — CUTTING IT CLOSE!';
     rEl.className   = 'fr-result ok';
     pEl.textContent = '+' + pts + ' pts';
-    pEl.style.color = '#4AE0A0';
+    pEl.style.color = '#ACCBD2';
   } else {
     rEl.textContent = 'NOT QUITE.';
     rEl.className   = 'fr-result bad';
@@ -1613,7 +1660,7 @@ function pickWildcard(idx) {
   const pts = 150;
   G.score  += pts;
   G.currentQ = { segIdx: 7, report: WILDCARD_REPORTS[idx] };
-  G.history.push({ seg: '⚡ WILD CARD', pts, correct: true, wild: true });
+  G.history.push({ seg: 'WILD CARD', pts, correct: true, wild: true });
 
   const rEl = document.getElementById('fr-result');
   const pEl = document.getElementById('fr-pts');
@@ -1668,17 +1715,18 @@ function showResults() {
   else                   headline = 'NORCO FOODS WOULD HIRE YOU ANYWAY.\nLet\'s talk about what tripped you up.';
   document.getElementById('results-headline').textContent = headline;
 
-  // Prize
-  const hasWild = G.history.some(h => h.wild);
-  if (hasWild) {
-    document.getElementById('prize-main').textContent = '⚡ Wild Card bonus.';
-    document.getElementById('prize-sub').textContent  = 'Ask Nijansh about your specific diagnosis.';
-  } else if (score >= 150) {
-    document.getElementById('prize-main').textContent = '🏆 You\'ve won an exclusive Heizen notebook.';
-    document.getElementById('prize-sub').textContent  = 'Limited to top players. Pick it up at the booth.';
+  // Rank (leaderboard already updated by addToLeaderboard)
+  const myEntry = leaderboard.find(p => p.name === G.player.name && p.company === G.player.company && p.score === score);
+  const rank    = leaderboard.indexOf(myEntry) + 1;
+  document.getElementById('results-rank').textContent = `You ranked #${rank} today`;
+
+  // Prize — top 3 on leaderboard win $100 Gift Card; everyone else gets booth invite
+  if (rank <= 3) {
+    document.getElementById('prize-main').textContent = '$100 Gift Card — Top 3 winner.';
+    document.getElementById('prize-sub').textContent  = 'Claim your prize at Booth 60S before you leave.';
   } else {
-    document.getElementById('prize-main').textContent = '🎁 You\'ve won a hand warmer.';
-    document.getElementById('prize-sub').textContent  = 'Pick it up at the booth.';
+    document.getElementById('prize-main').textContent = 'Thanks for playing.';
+    document.getElementById('prize-sub').textContent  = 'Top 3 on the leaderboard win a $100 Gift Card. Keep playing to climb!';
   }
 
   // Meaning
@@ -1688,11 +1736,6 @@ function showResults() {
     meaning = `Your ${wrongOnes[0].seg.toLowerCase()} results point to a high-value opportunity. That's the first problem Heizen typically fixes for teams like yours.`;
   }
   document.getElementById('results-meaning').textContent = meaning;
-
-  // Rank
-  const myEntry = leaderboard.find(p => p.name === G.player.name && p.company === G.player.company && p.score === score);
-  const rank    = leaderboard.indexOf(myEntry) + 1;
-  document.getElementById('results-rank').textContent = `You ranked #${rank} today`;
 
   showScreen('results');
   setTimeout(() => animateCounter(score), 400);
@@ -1738,7 +1781,7 @@ function renderLeaderboard() {
   }
   el.innerHTML = leaderboard.map((p, i) => `
     <div class="lb-row" id="lbr${i}">
-      <div class="lb-rank ${i===0?'gold':''}">${i===0?'🥇':'#'+(i+1)}</div>
+      <div class="lb-rank ${i===0?'gold':''}">#${i+1}</div>
       <div class="lb-name">${esc(p.name)}</div>
       <div class="lb-co">${esc(p.company)}</div>
       <div class="lb-score">${p.score}</div>
