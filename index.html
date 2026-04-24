@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Spin The Chain — Heizen · ISM World 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   BASE RESET & VARIABLES
+   ================================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:         #0A0F1E;
+  --teal:       #1D9E75;
+  --teal-dark:  #136B4E;
+  --teal-mid:   #1A8A65;
+  --teal-light: #25C492;
+  --alert:      #E85D3A;
+  --navy:       #0A2744;
+  --navy-mid:   #0D3566;
+  --gold:       #F5C518;
+  --white:      #FFFFFF;
+  --gray:       #8892A4;
+}
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+  user-select: none;
+  cursor: default;
+}
+
+/* ================================================================
+   SCREENS
+   ================================================================ */
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.screen.active  { display: flex; }
+.screen.visible { opacity: 1; }
+
+/* ================================================================
+   GRID BACKGROUND
+   ================================================================ */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(29,158,117,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,158,117,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   LOGO (shared)
+   ================================================================ */
+.logo {
+  position: absolute;
+  top: 28px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 50;
+}
+.logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--white);
+}
+
+/* ================================================================
+   TYPOGRAPHY UTILITIES
+   ================================================================ */
+.sg { font-family: 'Space Grotesk', sans-serif; }
+
+/* ================================================================
+   SCREEN 1 — ATTRACT
+   ================================================================ */
+#screen-attract { background: var(--bg); }
+
+.metrics-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.metric-widget {
+  position: absolute;
+  background: rgba(29,158,117,0.07);
+  border: 1px solid rgba(29,158,117,0.18);
+  border-radius: 8px;
+  padding: 14px 20px;
+  min-width: 210px;
+  animation: metricFloat 6s ease-in-out infinite;
+}
+.metric-widget:nth-child(2n)   { animation-delay: -2s; }
+.metric-widget:nth-child(3n)   { animation-delay: -4s; }
+@keyframes metricFloat {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-6px); }
+}
+.mw-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.mw-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--white);
+  transition: opacity 0.3s;
+}
+.mw-delta { font-size: 12px; color: var(--alert); margin-top: 3px; }
+
+.attract-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  margin-top: -50px;
+}
+.attract-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 76px;
+  font-weight: 700;
+  text-align: center;
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1500px;
+  line-height: 1.1;
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 5px;
+  height: 0.85em;
+  background: var(--teal);
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: blink 0.75s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.attract-booth { font-size: 25px; color: var(--gray); letter-spacing: 2px; }
+
+.attract-spin-btn {
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  padding: 28px 88px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  animation: btnPulse 2.2s ease-in-out infinite;
+  transition: transform 0.15s;
+}
+.attract-spin-btn:hover { transform: scale(1.05); }
+@keyframes btnPulse {
+  0%,100% { box-shadow: 0 0 30px rgba(29,158,117,0.4); }
+  50%     { box-shadow: 0 0 70px rgba(29,158,117,0.8), 0 0 140px rgba(29,158,117,0.25); }
+}
+
+.attract-lb {
+  position: absolute;
+  top: 80px;
+  right: 44px;
+  width: 390px;
+  background: rgba(10,39,68,0.65);
+  border: 1px solid rgba(29,158,117,0.28);
+  border-radius: 8px;
+  padding: 24px 28px;
+  z-index: 10;
+}
+.attract-lb-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+.attract-lb-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.attract-lb-row:last-child { border-bottom: none; }
+.attract-lb-rank  { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--teal); width: 28px; flex-shrink: 0; }
+.attract-lb-info  { flex: 1; overflow: hidden; }
+.attract-lb-name  { font-size: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.attract-lb-co    { font-size: 13px; color: var(--gray); }
+.attract-lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--gold); flex-shrink: 0; }
+
+/* ================================================================
+   SCREEN 2 — REGISTRATION
+   ================================================================ */
+.reg-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 62px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.reg-title span { color: var(--teal); }
+.reg-sub { font-size: 24px; color: var(--gray); text-align: center; margin-bottom: 52px; position: relative; z-index: 1; }
+
+.reg-form { width: 820px; display: flex; flex-direction: column; gap: 22px; position: relative; z-index: 1; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+}
+.form-input, .form-select {
+  background: rgba(10,39,68,0.55);
+  border: 2px solid rgba(29,158,117,0.28);
+  border-radius: 4px;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 30px;
+  padding: 18px 26px;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s, background 0.2s;
+}
+.form-input:focus, .form-select:focus {
+  border-color: var(--teal);
+  background: rgba(10,39,68,0.9);
+}
+.form-input::placeholder { color: rgba(255,255,255,0.28); }
+.form-select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='%231D9E75' d='M5 7l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 20px center; }
+.form-select option { background: #0A1F35; color: var(--white); font-size: 24px; }
+
+.reg-cta {
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 26px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s, transform 0.15s;
+}
+.reg-cta:hover { background: var(--teal-light); transform: scale(1.02); }
+.reg-note { text-align: center; font-size: 18px; color: var(--gray); margin-top: 8px; }
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%     { transform: translateX(-14px); }
+  40%     { transform: translateX(14px); }
+  60%     { transform: translateX(-8px); }
+  80%     { transform: translateX(8px); }
+}
+
+/* ================================================================
+   SCREEN 3 — SPIN
+   ================================================================ */
+#screen-spin {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  padding-top: 30px;
+}
+
+.spin-left  { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 1; }
+.spin-right { display: flex; flex-direction: column; gap: 22px; min-width: 440px; position: relative; z-index: 1; }
+
+.spin-player {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--teal);
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(29,158,117,0.2);
+  width: 100%;
+}
+.spin-counter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.spin-counter strong { color: var(--white); }
+
+.wheel-wrap { position: relative; width: 600px; height: 600px; }
+#wheel-canvas { display: block; }
+
+.wheel-pointer {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 44px solid var(--alert);
+  filter: drop-shadow(0 0 10px rgba(232,93,58,0.9));
+  z-index: 10;
+}
+
+.spin-btn {
+  background: var(--teal);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  padding: 22px 84px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, opacity 0.2s;
+}
+.spin-btn:hover:not(:disabled) { background: var(--teal-light); transform: scale(1.05); }
+.spin-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.score-panel {
+  background: rgba(10,39,68,0.8);
+  border: 1px solid rgba(29,158,117,0.28);
+  border-radius: 8px;
+  padding: 24px 32px;
+}
+.score-panel-label { font-family: 'Space Grotesk', sans-serif; font-size: 14px; color: var(--teal); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; }
+.score-panel-value { font-family: 'Space Grotesk', sans-serif; font-size: 80px; font-weight: 700; color: var(--white); line-height: 1; }
+
+.spin-history { display: flex; flex-direction: column; gap: 10px; min-height: 100px; }
+.history-item {
+  background: rgba(10,39,68,0.5);
+  border-left: 3px solid var(--teal);
+  padding: 10px 18px;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 19px;
+}
+.history-pts { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 24px; }
+.history-pts.ok   { color: var(--teal); }
+.history-pts.bad  { color: var(--alert); }
+.history-pts.wild { color: var(--gold); }
+
+.spin-info { margin-top: auto; padding-top: 16px; font-size: 19px; color: var(--gray); line-height: 1.7; }
+.spin-info strong { color: var(--teal); display: block; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.spin-info .al { color: var(--alert); }
+
+@keyframes wheelFlash {
+  0%,100% { box-shadow: none; }
+  33%,66% { box-shadow: 0 0 60px rgba(29,158,117,0.7), inset 0 0 40px rgba(29,158,117,0.3); }
+}
+.wheel-flash { animation: wheelFlash 0.9s ease; border-radius: 50%; }
+
+/* ================================================================
+   SCREEN 4 — QUESTION
+   ================================================================ */
+#screen-question {
+  padding: 36px 80px 32px;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.q-timer-bar-wrap {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.q-timer-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--alert);
+  border-radius: 4px;
+  box-shadow: 0 0 14px rgba(232,93,58,0.6);
+  transition: width linear;
+}
+
+.q-timer-num {
+  position: absolute;
+  top: 44px;
+  right: 80px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--alert);
+  z-index: 20;
+}
+.q-timer-num.urgent { animation: timerUrgent 0.5s ease-in-out infinite alternate; }
+@keyframes timerUrgent { from { opacity: 1; } to { opacity: 0.35; } }
+
+.q-segment-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.q-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+  max-width: 1700px;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+
+.answers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  width: 100%;
+  max-width: 1700px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.answer-card {
+  background: rgba(10,39,68,0.65);
+  border: 2px solid rgba(29,158,117,0.18);
+  border-radius: 8px;
+  padding: 26px 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 110px;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.answer-card:hover:not(.locked) {
+  border-color: var(--teal);
+  background: rgba(29,158,117,0.12);
+  transform: scale(1.01);
+}
+.answer-letter {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--teal);
+  min-width: 38px;
+}
+.answer-text { font-size: 28px; font-weight: 500; line-height: 1.3; }
+
+.answer-card.locked { cursor: not-allowed; }
+.answer-card.is-correct { border-color: var(--teal) !important; background: rgba(29,158,117,0.22) !important; animation: correctFlash 0.4s ease; }
+.answer-card.is-wrong   { border-color: var(--alert) !important; background: rgba(232,93,58,0.18) !important; }
+.answer-card.faded      { opacity: 0.3; }
+@keyframes correctFlash {
+  0%  { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100%{ transform: scale(1); }
+}
+
+/* ================================================================
+   SCREEN 4b — WILD CARD
+   ================================================================ */
+#screen-wildcard { gap: 44px; }
+
+.wc-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 96px;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  animation: wcGlow 1.6s ease-in-out infinite alternate;
+}
+@keyframes wcGlow {
+  from { text-shadow: 0 0 40px rgba(245,197,24,0.5); }
+  to   { text-shadow: 0 0 90px rgba(245,197,24,1), 0 0 180px rgba(245,197,24,0.3); }
+}
+.wc-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  max-width: 1100px;
+  line-height: 1.45;
+  position: relative;
+  z-index: 1;
+}
+.wc-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  width: 1020px;
+  position: relative;
+  z-index: 1;
+}
+.wc-tile {
+  background: rgba(10,39,68,0.65);
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 38px 40px;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 116px;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.wc-tile:hover  { border-color: var(--gold); background: rgba(245,197,24,0.1); transform: scale(1.04); }
+.wc-tile.chosen { border-color: var(--gold); background: rgba(245,197,24,0.18); }
+
+/* ================================================================
+   GLOBAL FIELD REPORT OVERLAY
+   ================================================================ */
+#field-report-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+}
+#field-report-overlay.open { display: flex; animation: frFadeIn 0.3s ease forwards; }
+@keyframes frFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.fr-card {
+  background: var(--teal-dark);
+  border: 2px solid var(--teal);
+  border-radius: 14px;
+  padding: 64px 72px;
+  max-width: 1140px;
+  width: 90%;
+  animation: frSlide 0.3s ease forwards;
+}
+@keyframes frSlide {
+  from { transform: translateX(70px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.fr-badge { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 10px; }
+.fr-result { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 700; margin-bottom: 18px; }
+.fr-result.ok   { color: #4AE0A0; }
+.fr-result.bad  { color: var(--alert); }
+.fr-result.wild { color: var(--gold); }
+.fr-pts { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; padding: 14px 22px; background: rgba(0,0,0,0.22); border-radius: 6px; margin-bottom: 28px; }
+.fr-text { font-size: 25px; line-height: 1.72; color: rgba(255,255,255,0.88); margin-bottom: 38px; }
+.fr-next {
+  display: none;
+  background: var(--white);
+  color: var(--teal-dark);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 20px 56px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.fr-next:hover { transform: scale(1.04); }
+
+/* ================================================================
+   SCREEN 5 — RESULTS
+   ================================================================ */
+#screen-results { padding: 28px 100px; gap: 20px; }
+
+.results-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--teal);
+  line-height: 1.2;
+  max-width: 1400px;
+  white-space: pre-line;
+  position: relative;
+  z-index: 1;
+}
+.results-score-wrap { text-align: center; position: relative; z-index: 1; }
+.results-score-label { font-family: 'Space Grotesk', sans-serif; font-size: 20px; color: var(--gray); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 4px; }
+.results-score-num   { font-family: 'Space Grotesk', sans-serif; font-size: 116px; font-weight: 700; color: var(--white); line-height: 1; }
+.results-rank { font-family: 'Space Grotesk', sans-serif; font-size: 28px; color: var(--gold); text-align: center; position: relative; z-index: 1; }
+
+.prize-box {
+  background: rgba(29,158,117,0.1);
+  border: 2px solid var(--teal);
+  border-radius: 8px;
+  padding: 22px 48px;
+  text-align: center;
+  max-width: 1000px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.prize-main { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 6px; }
+.prize-sub  { font-size: 21px; color: rgba(255,255,255,0.7); }
+
+.results-meaning { font-size: 24px; color: rgba(255,255,255,0.72); text-align: center; max-width: 1250px; line-height: 1.55; position: relative; z-index: 1; }
+
+.results-cta {
+  background: var(--teal);
+  border-radius: 8px;
+  padding: 28px 80px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1400px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.results-cta-main { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; margin-bottom: 6px; }
+.results-cta-sub  { font-size: 24px; color: rgba(255,255,255,0.8); }
+
+.qr-placeholder {
+  width: 120px; height: 120px;
+  background: var(--white);
+  border-radius: 6px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.results-btns { display: flex; gap: 24px; justify-content: center; position: relative; z-index: 1; }
+.btn-ghost {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.28);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  padding: 18px 48px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+.btn-solid {
+  background: var(--teal);
+  border: 2px solid var(--teal);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 18px 48px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-solid:hover { background: var(--teal-light); transform: scale(1.03); }
+
+/* ================================================================
+   SCREEN 6 — LEADERBOARD
+   ================================================================ */
+#screen-leaderboard { padding: 50px 100px; gap: 28px; justify-content: flex-start; }
+
+.lb-title { font-family: 'Space Grotesk', sans-serif; font-size: 58px; font-weight: 700; color: var(--teal); text-align: center; letter-spacing: 2px; position: relative; z-index: 1; }
+.lb-sub   { font-size: 22px; color: var(--gray); text-align: center; position: relative; z-index: 1; }
+
+.lb-table { width: 100%; max-width: 1500px; position: relative; z-index: 1; }
+.lb-header {
+  display: grid;
+  grid-template-columns: 90px 1fr 1fr 140px 260px;
+  gap: 16px;
+  padding: 14px 24px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  border-bottom: 1px solid rgba(29,158,117,0.3);
+  margin-bottom: 6px;
+}
+.lb-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 1fr 140px 260px;
+  gap: 16px;
+  padding: 18px 24px;
+  background: rgba(10,39,68,0.38);
+  border: 1px solid rgba(29,158,117,0.08);
+  border-radius: 6px;
+  margin-bottom: 7px;
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.lb-row.in { opacity: 1; transform: translateX(0); }
+.lb-row:first-child { border-color: rgba(245,197,24,0.35); background: rgba(245,197,24,0.05); }
+.lb-rank  { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--teal); }
+.lb-rank.gold { color: var(--gold); }
+.lb-name  { font-size: 24px; font-weight: 600; align-self: center; }
+.lb-co    { font-size: 20px; color: var(--gray); align-self: center; }
+.lb-score { font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: var(--gold); text-align: right; align-self: center; }
+.lb-seg   { font-size: 17px; color: var(--teal); align-self: center; }
+.lb-footer { font-size: 19px; color: var(--gray); text-align: center; position: relative; z-index: 1; }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     GLOBAL FIELD REPORT OVERLAY
+     ============================================================ -->
+<div id="field-report-overlay">
+  <div class="fr-card">
+    <div class="fr-badge">Field Report</div>
+    <div class="fr-result" id="fr-result">CORRECT!</div>
+    <div class="fr-pts" id="fr-pts">+100 pts</div>
+    <div class="fr-text" id="fr-text"></div>
+    <button class="fr-next" id="fr-next" onclick="afterQuestion()">NEXT SPIN →</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 1 — ATTRACT
+     ============================================================ -->
+<div id="screen-attract" class="screen">
+  <div class="grid-bg"></div>
+
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="metrics-layer" id="metrics-layer"></div>
+
+  <div class="attract-lb">
+    <div class="attract-lb-title">⚡ Top Players Today</div>
+    <div id="attract-lb-list"></div>
+  </div>
+
+  <div class="attract-content">
+    <div class="attract-headline">
+      <span id="tw-text"></span><span class="typewriter-cursor"></span>
+    </div>
+    <div class="attract-booth">ISM WORLD 2026 &nbsp;·&nbsp; BOOTH 60S &nbsp;·&nbsp; HEIZEN.WORK</div>
+    <button class="attract-spin-btn" onclick="goToRegister()">SPIN TO WIN →</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 2 — REGISTRATION
+     ============================================================ -->
+<div id="screen-register" class="screen">
+  <div class="grid-bg"></div>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="reg-title">BEFORE WE <span>SPIN</span></div>
+  <div class="reg-sub">Tell us who's playing</div>
+
+  <div class="reg-form" id="reg-form">
+    <div class="form-group">
+      <label class="form-label">First Name</label>
+      <input type="text" class="form-input" id="reg-name" placeholder="Your name" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Company</label>
+      <input type="text" class="form-input" id="reg-company" placeholder="Your company" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your Role</label>
+      <select class="form-select" id="reg-role">
+        <option value="">Select your role…</option>
+        <option>CPO</option>
+        <option>VP Supply Chain</option>
+        <option>Director Procurement</option>
+        <option>VP Operations</option>
+        <option>SVP Supply Chain</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <button class="reg-cta" onclick="startGame()">LET'S SPIN →</button>
+    <div class="reg-note">Top scorers go on the leaderboard</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 3 — SPIN
+     ============================================================ -->
+<div id="screen-spin" class="screen">
+  <div class="grid-bg"></div>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="spin-left">
+    <div class="spin-player" id="spin-player-label">—</div>
+    <div class="spin-counter">SPIN <strong id="spin-num">1</strong> OF 3</div>
+    <div class="wheel-wrap" id="wheel-wrap">
+      <div class="wheel-pointer"></div>
+      <canvas id="wheel-canvas" width="600" height="600"></canvas>
+    </div>
+    <button class="spin-btn" id="spin-btn" onclick="doSpin()">SPIN</button>
+  </div>
+
+  <div class="spin-right">
+    <div class="score-panel">
+      <div class="score-panel-label">Score</div>
+      <div class="score-panel-value" id="spin-score-val">0</div>
+    </div>
+    <div class="spin-history" id="spin-history"></div>
+    <div class="spin-info">
+      <strong>How To Score</strong>
+      Correct answer: +100 pts<br>
+      Wild Card: +150 pts<br>
+      Wrong answer: 0 pts<br>
+      <span class="al">Answer before time runs out!</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 4 — QUESTION
+     ============================================================ -->
+<div id="screen-question" class="screen">
+  <div class="grid-bg"></div>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="q-timer-num" id="q-timer-num">15</div>
+
+  <div class="q-timer-bar-wrap">
+    <div class="q-timer-bar" id="q-timer-bar"></div>
+  </div>
+
+  <div class="q-segment-label" id="q-segment-label">SEGMENT</div>
+  <div class="q-text" id="q-text">Question text</div>
+  <div class="answers-grid" id="answers-grid"></div>
+</div>
+
+<!-- ============================================================
+     SCREEN 4b — WILD CARD
+     ============================================================ -->
+<div id="screen-wildcard" class="screen">
+  <div class="grid-bg"></div>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="wc-title">⚡ YOUR TURN.</div>
+  <div class="wc-sub">What's the one supply chain problem<br>costing your team the most right now?</div>
+  <div class="wc-tiles">
+    <div class="wc-tile" onclick="pickWildcard(0)">🔴 Visibility &amp; OTIF</div>
+    <div class="wc-tile" onclick="pickWildcard(1)">🟡 Forecast Accuracy</div>
+    <div class="wc-tile" onclick="pickWildcard(2)">🔵 Procurement Cycle</div>
+    <div class="wc-tile" onclick="pickWildcard(3)">⚪ Data &amp; Reporting</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 5 — RESULTS
+     ============================================================ -->
+<div id="screen-results" class="screen">
+  <div class="grid-bg"></div>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="results-headline" id="results-headline">SUPPLY CHAIN EXPERT.</div>
+
+  <div class="results-score-wrap">
+    <div class="results-score-label">Final Score</div>
+    <div class="results-score-num" id="results-score-num">0</div>
+  </div>
+
+  <div class="results-rank" id="results-rank">You ranked #1 today</div>
+
+  <div class="prize-box">
+    <div class="prize-main" id="prize-main">🎁 You've won a hand warmer.</div>
+    <div class="prize-sub" id="prize-sub">Pick it up at the booth.</div>
+  </div>
+
+  <div class="results-meaning" id="results-meaning"></div>
+
+  <div class="results-cta">
+    <div>
+      <div class="results-cta-main">Want to see how we fix your highest-cost problem?</div>
+      <div class="results-cta-sub">Book 20 minutes at Booth 60S &nbsp;·&nbsp; heizen.work</div>
+    </div>
+    <div class="qr-placeholder">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+        <rect x="8"  y="8"  width="34" height="34" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="16" y="16" width="18" height="18" fill="#000"/>
+        <rect x="78" y="8"  width="34" height="34" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="86" y="16" width="18" height="18" fill="#000"/>
+        <rect x="8"  y="78" width="34" height="34" fill="none" stroke="#000" stroke-width="4"/>
+        <rect x="16" y="86" width="18" height="18" fill="#000"/>
+        <rect x="50" y="8"  width="8" height="8" fill="#000"/>
+        <rect x="62" y="8"  width="8" height="8" fill="#000"/>
+        <rect x="50" y="20" width="8" height="8" fill="#000"/>
+        <rect x="62" y="50" width="8" height="8" fill="#000"/>
+        <rect x="50" y="50" width="8" height="8" fill="#000"/>
+        <rect x="78" y="50" width="8" height="8" fill="#000"/>
+        <rect x="78" y="62" width="8" height="8" fill="#000"/>
+        <rect x="62" y="62" width="8" height="8" fill="#000"/>
+        <rect x="104"y="50" width="8" height="8" fill="#000"/>
+        <rect x="104"y="62" width="8" height="8" fill="#000"/>
+        <rect x="50" y="78" width="8" height="8" fill="#000"/>
+        <rect x="62" y="78" width="8" height="8" fill="#000"/>
+        <rect x="50" y="90" width="8" height="8" fill="#000"/>
+        <rect x="50" y="104"width="8" height="8" fill="#000"/>
+        <rect x="62" y="104"width="8" height="8" fill="#000"/>
+        <rect x="78" y="90" width="8" height="8" fill="#000"/>
+        <rect x="90" y="78" width="8" height="8" fill="#000"/>
+        <rect x="104"y="78" width="8" height="8" fill="#000"/>
+        <rect x="104"y="90" width="8" height="8" fill="#000"/>
+        <rect x="90" y="104"width="8" height="8" fill="#000"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="results-btns">
+    <button class="btn-ghost" onclick="goToRegister()">PLAY AGAIN</button>
+    <button class="btn-solid" onclick="openLeaderboard()">SEE LEADERBOARD</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCREEN 6 — LEADERBOARD
+     ============================================================ -->
+<div id="screen-leaderboard" class="screen">
+  <div class="grid-bg"></div>
+  <div class="logo">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <polygon points="17,2 32,32 2,32" fill="none" stroke="#1D9E75" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="17,10 28,32 6,32" fill="#1D9E75" opacity="0.35"/>
+    </svg>
+    <span class="logo-text">HEIZEN</span>
+  </div>
+
+  <div class="lb-title">TODAY'S SUPPLY CHAIN CHAMPIONS</div>
+  <div class="lb-sub">ISM World 2026 &nbsp;·&nbsp; Booth 60S &nbsp;·&nbsp; heizen.work</div>
+
+  <div class="lb-table">
+    <div class="lb-header">
+      <div>RANK</div><div>NAME</div><div>COMPANY</div><div>SCORE</div><div>TOP SEGMENT</div>
+    </div>
+    <div id="lb-rows"></div>
+  </div>
+
+  <div class="lb-footer" id="lb-footer">Returning to attract screen in 10s · Press any key to return now</div>
+</div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+'use strict';
+
+/* ================================================================
+   GAME DATA
+   ================================================================ */
+
+const SEGMENT_NAMES = [
+  'OTIF & VISIBILITY',
+  'DEMAND FORECASTING',
+  'PROCUREMENT',
+  'DATA INTEGRITY',
+  'SUPPLIER RISK',
+  'PLANNING EFFICIENCY',
+  'TECH DEBT',
+  '⚡ WILD CARD'
+];
+
+const WHEEL_LABELS = [
+  'OTIF &\nVisibility',
+  'Demand\nForecast',
+  'Procurement',
+  'Data\nIntegrity',
+  'Supplier\nRisk',
+  'Planning\nEfficiency',
+  'Tech Debt',
+  '⚡ WILD\nCARD'
+];
+
+// Alternating dark navy / teal
+const WHEEL_COLORS = [
+  '#1D9E75','#0A2744',
+  '#1D9E75','#0A2744',
+  '#1D9E75','#0A2744',
+  '#1D9E75','#0A2744'
+];
+
+const QUESTIONS = [
+  {
+    segIdx: 0,
+    q: 'A 500-person supply chain team spends 30 minutes daily pulling OTIF data manually. At $75/hour fully loaded cost — what does that cost annually?',
+    answers: ['$1.4M', '$2.8M', '$4.7M', 'Over $8M'],
+    correct: 2,
+    report: "ITC Limited's operations team had OTIF data fragmented across ERP systems. Delays were only visible after they cascaded. Heizen built a unified operations intelligence layer — real-time OTIF tracking, root cause classification, predictive delay identification. Their ops lead said they went from managing backward to seeing forward."
+  },
+  {
+    segIdx: 1,
+    q: 'A 2% improvement in forecast accuracy for a $500M revenue CPG brand reduces inventory carrying costs by approximately how much annually?',
+    answers: ['$500K', '$1–2M', '$3–5M', 'Over $10M'],
+    correct: 2,
+    report: "Hindustan Unilever operated with 1,063 SKUs across distribution channels. Static models couldn't adapt to dynamic consumption patterns. Heizen built SKU-level AI demand forecasting — dynamic, multi-market, integrated into existing planning workflows. Their Supply Chain Planning Lead said the planning clarity was something they couldn't have achieved manually."
+  },
+  {
+    segIdx: 2,
+    q: 'A procurement team processes 1,000 POs per year. Each has an average 3-day delay due to manual email approvals. How many working days are lost annually?',
+    answers: ['300 days', '1,000 days', '2,000 days', '3,000 days'],
+    correct: 3,
+    report: "Raphe mPhibr coordinated capital procurement across multiple teams through email threads with no structured data, no approval visibility, no audit trail. Heizen built a structured procurement lifecycle — request to PO, configurable approvals, complete audit trail, automated delay alerts. Managers could act before problems escalated."
+  },
+  {
+    segIdx: 3,
+    q: 'What percentage of supply chain decisions are typically made on data that is over 24 hours old?',
+    answers: ['31%', '47%', '73%', '89%'],
+    correct: 2,
+    report: "DHL's teams ran critical planning workflows entirely on Excel. Errors entered silently — surfacing only after cascading downstream. Heizen built intelligent validation and audit logging inside DHL's existing Excel environment. No new software. No retraining. Senior Manager Chor Hung Choy said what was once highly manual and tedious became efficient and scalable."
+  },
+  {
+    segIdx: 4,
+    q: 'What is the average cost of a single significant supply chain disruption for a mid-size manufacturer? (Gartner)',
+    answers: ['$14M', '$82M', '$184M', '$430M'],
+    correct: 2,
+    report: "Real-time supply chain visibility systems reduce disruption response time by up to 70% and financial impact by up to 40%. The difference between reactive and predictive operations isn't technology — it's architecture. Heizen builds the architecture."
+  },
+  {
+    segIdx: 5,
+    q: 'In a typical enterprise S&OP process, what percentage of planning team time goes to data preparation vs. actual decision making?',
+    answers: ['30% prep / 70% decisions', '50% / 50%', '60% prep / 40% decisions', '80% prep / 20% decisions'],
+    correct: 2,
+    report: "The ratio should be inverted. When planning teams spend 60% of their time pulling and reconciling data, they have 40% left to actually use it. Heizen flips this — automating data consolidation so planners spend their time on decisions, not spreadsheets."
+  },
+  {
+    segIdx: 6,
+    q: 'What percentage of enterprise supply chain teams still use Excel as their primary planning or reporting tool? (Gartner)',
+    answers: ['28%', '41%', '65%', '79%'],
+    correct: 2,
+    report: "Not because they want to. Because nobody built them something better that fits their workflow. Heizen doesn't replace your stack — we build the intelligent layer on top of what you already have. No migration. No retraining. Just systems that finally work together."
+  }
+];
+
+const WILDCARD_REPORTS = [
+  QUESTIONS[0].report,
+  QUESTIONS[1].report,
+  QUESTIONS[2].report,
+  QUESTIONS[3].report
+];
+
+/* ================================================================
+   STATE
+   ================================================================ */
+
+let leaderboard = [];
+let currentScreen = 'attract';
+
+function newGameState() {
+  return {
+    player:        { name: '', company: '', role: '' },
+    score:         0,
+    spinsLeft:     3,
+    spinsDone:     0,
+    history:       [],
+    usedSegs:      [],
+    currentQ:      null,
+    timerTick:     null,
+    timerVal:      15,
+    answerLocked:  false,
+    spinning:      false
+  };
+}
+let G = newGameState();
+
+/* ================================================================
+   SCREEN MANAGEMENT
+   ================================================================ */
+
+function showScreen(id) {
+  const prev = document.querySelector('.screen.active');
+  if (prev) {
+    prev.classList.remove('visible');
+    setTimeout(() => { prev.classList.remove('active'); }, 420);
+  }
+  const delay = prev ? 430 : 0;
+  setTimeout(() => {
+    const next = document.getElementById('screen-' + id);
+    if (!next) return;
+    next.classList.add('active');
+    requestAnimationFrame(() => next.classList.add('visible'));
+    currentScreen = id;
+    if (id === 'attract') refreshAttractLB();
+    if (id === 'spin')    refreshSpinScreen();
+  }, delay);
+}
+
+/* ================================================================
+   ATTRACT SCREEN — TYPEWRITER
+   ================================================================ */
+
+const HEADLINES = [
+  'HOW MUCH IS YOUR SUPPLY CHAIN COSTING YOU?',
+  'SPIN THE CHAIN. FIND OUT.',
+  'PRIZES FOR EVERY SPIN.'
+];
+
+let twIdx = 0, twChar = 0, twDir = 1, twTimer = null;
+
+function startTypewriter() {
+  clearTimeout(twTimer);
+  twIdx = 0; twChar = 0; twDir = 1;
+  const el = document.getElementById('tw-text');
+  if (el) el.textContent = '';
+  twStep();
+}
+
+function twStep() {
+  const el = document.getElementById('tw-text');
+  if (!el) return;
+  const txt = HEADLINES[twIdx];
+  if (twDir === 1) {
+    el.textContent = txt.slice(0, twChar);
+    twChar++;
+    if (twChar > txt.length) {
+      twTimer = setTimeout(() => { twDir = -1; twStep(); }, 2800);
+    } else {
+      twTimer = setTimeout(twStep, 38);
+    }
+  } else {
+    el.textContent = txt.slice(0, twChar);
+    twChar--;
+    if (twChar < 0) {
+      twIdx = (twIdx + 1) % HEADLINES.length;
+      twDir = 1; twChar = 0;
+      twTimer = setTimeout(twStep, 300);
+    } else {
+      twTimer = setTimeout(twStep, 18);
+    }
+  }
+}
+
+/* ================================================================
+   ATTRACT SCREEN — LIVE METRICS
+   ================================================================ */
+
+const METRIC_DATA = [
+  { label: 'OTIF Rate',         v: () => (82 + Math.random()*5).toFixed(1)+'%',         d: () => '▼ '+(Math.random()*2).toFixed(1)+'% vs target' },
+  { label: 'PO Delays Active',  v: () => Math.floor(180+Math.random()*50)+' orders',    d: () => '▲ '+Math.floor(Math.random()*8+2)+' this week' },
+  { label: 'Inventory Days',    v: () => Math.floor(38+Math.random()*10)+' days',        d: () => '▲ '+Math.floor(Math.random()*3+1)+' over target' },
+  { label: 'Forecast Accuracy', v: () => (72+Math.random()*8).toFixed(1)+'%',           d: () => '▼ '+(Math.random()*4).toFixed(1)+'% deviation' },
+  { label: 'Supplier On-Time',  v: () => (74+Math.random()*10).toFixed(1)+'%',          d: () => '⚠ '+Math.floor(Math.random()*5+1)+' flagged' },
+  { label: 'Data Latency',      v: () => Math.floor(18+Math.random()*24)+' hrs avg',    d: () => '⚠ '+Math.floor(Math.random()*3+1)+' stale feeds' },
+  { label: 'Active POs',        v: () => (1800+Math.floor(Math.random()*300)).toLocaleString(), d: () => '▲ '+Math.floor(Math.random()*60+10)+' queued' },
+  { label: 'Planning Cycle',    v: () => Math.floor(4+Math.random()*3)+' days',         d: () => '⚡ Target: 2 days' }
+];
+
+const METRIC_POS = [
+  { top: 90,  left: 80   },
+  { top: 90,  left: 680  },
+  { top: 90,  left: 1360 },
+  { top: 320, left: 55   },
+  { top: 320, left: 1470 },
+  { top: 580, left: 80   },
+  { top: 820, left: 120  },
+  { top: 840, left: 1400 }
+];
+
+function buildMetrics() {
+  const layer = document.getElementById('metrics-layer');
+  METRIC_DATA.forEach((m, i) => {
+    const p = METRIC_POS[i];
+    const w = document.createElement('div');
+    w.className = 'metric-widget';
+    w.style.top  = p.top  + 'px';
+    w.style.left = p.left + 'px';
+    w.innerHTML  = `<div class="mw-label">${m.label}</div>
+                    <div class="mw-value" id="mv${i}">${m.v()}</div>
+                    <div class="mw-delta" id="md${i}">${m.d()}</div>`;
+    layer.appendChild(w);
+  });
+  setInterval(() => {
+    METRIC_DATA.forEach((m, i) => {
+      const v = document.getElementById('mv' + i);
+      const d = document.getElementById('md' + i);
+      if (v) { v.style.opacity = '0.3'; setTimeout(() => { v.textContent = m.v(); v.style.opacity = '1'; }, 280); }
+      if (d) d.textContent = m.d();
+    });
+  }, 2400);
+}
+
+function refreshAttractLB() {
+  const el = document.getElementById('attract-lb-list');
+  if (!leaderboard.length) {
+    el.innerHTML = `<div class="attract-lb-row">
+      <div class="attract-lb-rank">#1</div>
+      <div class="attract-lb-info"><div class="attract-lb-name">—</div><div class="attract-lb-co">Be the first to play</div></div>
+      <div class="attract-lb-score">—</div></div>`;
+    return;
+  }
+  el.innerHTML = leaderboard.slice(0,5).map((p,i) => `
+    <div class="attract-lb-row">
+      <div class="attract-lb-rank">#${i+1}</div>
+      <div class="attract-lb-info">
+        <div class="attract-lb-name">${esc(p.name)}</div>
+        <div class="attract-lb-co">${esc(p.company)}</div>
+      </div>
+      <div class="attract-lb-score">${p.score}</div>
+    </div>`).join('');
+}
+
+/* ================================================================
+   REGISTRATION
+   ================================================================ */
+
+function goToRegister() {
+  showScreen('register');
+  setTimeout(() => { const n = document.getElementById('reg-name'); if (n) n.focus(); }, 500);
+}
+
+function startGame() {
+  const name    = (document.getElementById('reg-name').value || '').trim();
+  const company = (document.getElementById('reg-company').value || '').trim();
+  const role    = document.getElementById('reg-role').value;
+  if (!name || !company || !role) {
+    const f = document.getElementById('reg-form');
+    f.style.animation = 'none';
+    requestAnimationFrame(() => { f.style.animation = 'shake 0.45s ease'; });
+    return;
+  }
+  G = newGameState();
+  G.player = { name, company, role };
+  document.getElementById('reg-name').value    = '';
+  document.getElementById('reg-company').value = '';
+  document.getElementById('reg-role').value    = '';
+  wheelAngle = 0;
+  showScreen('spin');
+}
+
+/* ================================================================
+   WHEEL
+   ================================================================ */
+
+const SEG_COUNT = 8;
+const SEG_ANG   = (Math.PI * 2) / SEG_COUNT;
+
+let wheelAngle = 0;
+let rafSpin    = null;
+
+function drawWheel(angle) {
+  const canvas = document.getElementById('wheel-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 300, cy = 300, r = 278;
+  ctx.clearRect(0, 0, 600, 600);
+
+  // Outer glow
+  const grd = ctx.createRadialGradient(cx, cy, r-18, cx, cy, r+16);
+  grd.addColorStop(0, 'rgba(29,158,117,0.3)');
+  grd.addColorStop(1, 'rgba(29,158,117,0)');
+  ctx.beginPath(); ctx.arc(cx, cy, r+16, 0, Math.PI*2);
+  ctx.fillStyle = grd; ctx.fill();
+
+  // Segments
+  for (let i = 0; i < SEG_COUNT; i++) {
+    const a0 = angle + i * SEG_ANG - Math.PI / 2;
+    const a1 = a0 + SEG_ANG;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, a0, a1);
+    ctx.closePath();
+    ctx.fillStyle   = WHEEL_COLORS[i];
+    ctx.fill();
+    ctx.strokeStyle = '#0A0F1E';
+    ctx.lineWidth   = 3;
+    ctx.stroke();
+
+    // Text label
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(a0 + SEG_ANG / 2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#FFFFFF';
+    const isWild = (i === 7);
+    ctx.font = `${isWild ? 'bold' : '600'} ${isWild ? 18 : 16}px "Space Grotesk", system-ui, sans-serif`;
+    const lines = WHEEL_LABELS[i].split('\n');
+    const lh    = 20;
+    const total = lines.length * lh;
+    lines.forEach((ln, li) => {
+      ctx.fillText(ln, r - 22, -total / 2 + li * lh + 14);
+    });
+    ctx.restore();
+  }
+
+  // Center hub
+  ctx.beginPath(); ctx.arc(cx, cy, 38, 0, Math.PI*2);
+  ctx.fillStyle   = '#0A0F1E'; ctx.fill();
+  ctx.strokeStyle = '#1D9E75'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.fillStyle = '#1D9E75';
+  ctx.font = 'bold 26px "Space Grotesk", system-ui, sans-serif';
+  ctx.textAlign     = 'center';
+  ctx.textBaseline  = 'middle';
+  ctx.fillText('H', cx, cy);
+  ctx.textBaseline = 'alphabetic';
+}
+
+/* ================================================================
+   SPIN LOGIC
+   ================================================================ */
+
+function doSpin() {
+  if (G.spinning || G.spinsLeft <= 0) return;
+  G.spinning = true;
+  document.getElementById('spin-btn').disabled = true;
+
+  // Avoid repeated segments when possible
+  let pool = [0,1,2,3,4,5,6,7].filter(i => !G.usedSegs.includes(i));
+  if (!pool.length) pool = [0,1,2,3,4,5,6,7];
+  const target = pool[Math.floor(Math.random() * pool.length)];
+
+  // Target angle: center of segment `target` aligned under pointer (top = -PI/2)
+  // center of seg i at rot a: a + i*SEG_ANG - PI/2 + SEG_ANG/2  →  set = -PI/2
+  // → a = -(i+0.5)*SEG_ANG
+  const rawTarget  = -((target + 0.5) * SEG_ANG);
+  const normTarget = ((rawTarget % (Math.PI*2)) + Math.PI*2) % (Math.PI*2);
+  const normCur    = ((wheelAngle % (Math.PI*2)) + Math.PI*2) % (Math.PI*2);
+  let   delta      = normTarget - normCur;
+  if (delta < 0) delta += Math.PI * 2;
+
+  const extraSpins = (5 + Math.floor(Math.random() * 3)) * Math.PI * 2;
+  const finalAngle = wheelAngle + extraSpins + delta;
+  const duration   = 4200 + Math.random() * 900;
+  const t0         = performance.now();
+  const startAngle = wheelAngle;
+
+  function ease(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function frame(now) {
+    const t    = Math.min((now - t0) / duration, 1);
+    wheelAngle = startAngle + (finalAngle - startAngle) * ease(t);
+    drawWheel(wheelAngle);
+    if (t < 1) { rafSpin = requestAnimationFrame(frame); }
+    else        { bounce(finalAngle, 0, target); }
+  }
+  rafSpin = requestAnimationFrame(frame);
+}
+
+function bounce(base, iter, landedSeg) {
+  if (iter >= 4) { drawWheel(base); onLanded(landedSeg); return; }
+  const amt = 0.055 * Math.pow(0.5, iter);
+  const bump = iter % 2 === 0 ? base + amt : base - amt;
+  const dur  = 150;
+  const t0   = performance.now();
+  const a0   = wheelAngle;
+  function fr(now) {
+    const t = Math.min((now - t0) / dur, 1);
+    const e = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2;
+    wheelAngle = a0 + (bump - a0) * e;
+    drawWheel(wheelAngle);
+    if (t < 1) requestAnimationFrame(fr);
+    else        bounce(bump, iter + 1, landedSeg);
+  }
+  requestAnimationFrame(fr);
+}
+
+function onLanded(segIdx) {
+  G.spinning = false;
+  G.usedSegs.push(segIdx);
+  G.spinsLeft--;
+  G.spinsDone++;
+
+  // Flash wheel
+  const ww = document.getElementById('wheel-wrap');
+  if (ww) { ww.classList.add('wheel-flash'); setTimeout(() => ww.classList.remove('wheel-flash'), 950); }
+
+  setTimeout(() => {
+    if (segIdx === 7) showScreen('wildcard');
+    else              showQuestion(segIdx);
+  }, 700);
+}
+
+/* ================================================================
+   SPIN SCREEN REFRESH
+   ================================================================ */
+
+function refreshSpinScreen() {
+  document.getElementById('spin-player-label').textContent =
+    G.player.name.toUpperCase() + ' · ' + G.player.role;
+  document.getElementById('spin-num').textContent      = G.spinsDone + 1;
+  document.getElementById('spin-score-val').textContent = G.score;
+  document.getElementById('spin-btn').disabled = false;
+
+  const hist = document.getElementById('spin-history');
+  hist.innerHTML = G.history.map(h => {
+    const cls = h.wild ? 'wild' : (h.correct ? 'ok' : 'bad');
+    return `<div class="history-item">
+      <span>${esc(h.seg)}</span>
+      <span class="history-pts ${cls}">${h.pts > 0 ? '+'+h.pts : '0'}</span>
+    </div>`;
+  }).join('');
+
+  drawWheel(wheelAngle);
+}
+
+/* ================================================================
+   QUESTION SCREEN
+   ================================================================ */
+
+function showQuestion(segIdx) {
+  const qObj = QUESTIONS.find(q => q.segIdx === segIdx);
+  if (!qObj) return;
+  G.currentQ     = qObj;
+  G.answerLocked = false;
+
+  document.getElementById('q-segment-label').textContent = '⚡ ' + SEGMENT_NAMES[segIdx];
+  document.getElementById('q-text').textContent          = qObj.q;
+
+  const letters = ['A','B','C','D'];
+  document.getElementById('answers-grid').innerHTML = qObj.answers.map((a, i) => `
+    <div class="answer-card" id="ac${i}" onclick="pickAnswer(${i})">
+      <div class="answer-letter">${letters[i]}</div>
+      <div class="answer-text">${esc(a)}</div>
+    </div>`).join('');
+
+  showScreen('question');
+  startTimer();
+}
+
+function startTimer() {
+  G.timerVal = 15;
+  const bar = document.getElementById('q-timer-bar');
+  const num = document.getElementById('q-timer-num');
+
+  bar.style.transition = 'none';
+  bar.style.width      = '100%';
+  requestAnimationFrame(() => {
+    bar.style.transition = 'width 15s linear';
+    bar.style.width      = '0%';
+  });
+
+  num.textContent = '15';
+  num.classList.remove('urgent');
+
+  clearInterval(G.timerTick);
+  G.timerTick = setInterval(() => {
+    G.timerVal--;
+    num.textContent = G.timerVal;
+    if (G.timerVal <= 5) num.classList.add('urgent');
+    if (G.timerVal <= 0) {
+      clearInterval(G.timerTick);
+      if (!G.answerLocked) timerOut();
+    }
+  }, 1000);
+}
+
+function timerOut() {
+  G.answerLocked = true;
+  lockAllAnswers(-1);
+  const c = document.getElementById('ac' + G.currentQ.correct);
+  if (c) c.classList.add('is-correct');
+  setTimeout(() => showFieldReport(false, 0), 500);
+}
+
+function pickAnswer(idx) {
+  if (G.answerLocked) return;
+  G.answerLocked = true;
+  clearInterval(G.timerTick);
+
+  const correct   = G.currentQ.correct;
+  const isCorrect = (idx === correct);
+  const nearlyOut = G.timerVal <= 3;
+  const pts       = isCorrect ? (nearlyOut ? 50 : 100) : 0;
+
+  if (isCorrect) {
+    document.getElementById('ac' + idx).classList.add('is-correct');
+  } else {
+    document.getElementById('ac' + idx).classList.add('is-wrong');
+    document.getElementById('ac' + correct).classList.add('is-correct');
+  }
+  lockAllAnswers(idx);
+
+  setTimeout(() => showFieldReport(isCorrect, pts), 800);
+}
+
+function lockAllAnswers(selected) {
+  for (let i = 0; i < 4; i++) {
+    const c = document.getElementById('ac' + i);
+    if (!c) continue;
+    c.classList.add('locked');
+    if (selected !== -1 && i !== selected && i !== G.currentQ.correct) {
+      c.classList.add('faded');
+    }
+  }
+}
+
+function showFieldReport(isCorrect, pts) {
+  G.score += pts;
+  G.history.push({ seg: SEGMENT_NAMES[G.currentQ.segIdx], pts, correct: isCorrect, wild: false });
+
+  const rEl = document.getElementById('fr-result');
+  const pEl = document.getElementById('fr-pts');
+  const tEl = document.getElementById('fr-text');
+  const nEl = document.getElementById('fr-next');
+
+  if (isCorrect) {
+    rEl.textContent = pts === 100 ? 'CORRECT!' : 'CORRECT — CUTTING IT CLOSE!';
+    rEl.className   = 'fr-result ok';
+    pEl.textContent = '+' + pts + ' pts';
+    pEl.style.color = '#4AE0A0';
+  } else {
+    rEl.textContent = 'NOT QUITE.';
+    rEl.className   = 'fr-result bad';
+    pEl.textContent = '+0 pts';
+    pEl.style.color = 'var(--alert)';
+  }
+
+  tEl.textContent      = G.currentQ.report;
+  nEl.style.display    = 'none';
+  nEl.textContent      = G.spinsLeft > 0 ? 'NEXT SPIN →' : 'SEE RESULTS →';
+
+  openFR();
+  setTimeout(() => { nEl.style.display = 'inline-block'; }, 2000);
+}
+
+/* ================================================================
+   WILD CARD
+   ================================================================ */
+
+function pickWildcard(idx) {
+  if (G.answerLocked) return;
+  G.answerLocked = true;
+
+  document.querySelectorAll('.wc-tile').forEach((t, i) => {
+    t.classList.toggle('chosen', i === idx);
+  });
+
+  const pts = 150;
+  G.score  += pts;
+  G.currentQ = { segIdx: 7, report: WILDCARD_REPORTS[idx] };
+  G.history.push({ seg: '⚡ WILD CARD', pts, correct: true, wild: true });
+
+  const rEl = document.getElementById('fr-result');
+  const pEl = document.getElementById('fr-pts');
+  const tEl = document.getElementById('fr-text');
+  const nEl = document.getElementById('fr-next');
+
+  rEl.textContent = "THAT'S EXACTLY WHAT WE FIX FIRST.";
+  rEl.className   = 'fr-result wild';
+  pEl.textContent = '+150 pts — Wild Card Bonus!';
+  pEl.style.color = 'var(--gold)';
+  tEl.textContent = WILDCARD_REPORTS[idx];
+  nEl.style.display = 'none';
+  nEl.textContent   = G.spinsLeft > 0 ? 'NEXT SPIN →' : 'SEE RESULTS →';
+
+  openFR();
+  setTimeout(() => { nEl.style.display = 'inline-block'; }, 2000);
+}
+
+/* ================================================================
+   FIELD REPORT OVERLAY
+   ================================================================ */
+
+function openFR() {
+  document.getElementById('field-report-overlay').classList.add('open');
+}
+function closeFR() {
+  document.getElementById('field-report-overlay').classList.remove('open');
+}
+
+function afterQuestion() {
+  closeFR();
+  G.answerLocked = false;
+  if (G.spinsLeft > 0) {
+    showScreen('spin');
+  } else {
+    showResults();
+  }
+}
+
+/* ================================================================
+   RESULTS
+   ================================================================ */
+
+function showResults() {
+  addToLeaderboard();
+  const score = G.score;
+
+  // Headline
+  let headline;
+  if      (score >= 300) headline = 'SUPPLY CHAIN EXPERT.\nYou\'ve seen this before.';
+  else if (score >= 150) headline = 'STRONG DIAGNOSIS.\nOne blind spot worth discussing.';
+  else                   headline = 'NORCO FOODS WOULD HIRE YOU ANYWAY.\nLet\'s talk about what tripped you up.';
+  document.getElementById('results-headline').textContent = headline;
+
+  // Prize
+  const hasWild = G.history.some(h => h.wild);
+  if (hasWild) {
+    document.getElementById('prize-main').textContent = '⚡ Wild Card bonus.';
+    document.getElementById('prize-sub').textContent  = 'Ask Nijansh about your specific diagnosis.';
+  } else if (score >= 150) {
+    document.getElementById('prize-main').textContent = '🏆 You\'ve won an exclusive Heizen notebook.';
+    document.getElementById('prize-sub').textContent  = 'Limited to top players. Pick it up at the booth.';
+  } else {
+    document.getElementById('prize-main').textContent = '🎁 You\'ve won a hand warmer.';
+    document.getElementById('prize-sub').textContent  = 'Pick it up at the booth.';
+  }
+
+  // Meaning
+  const wrongOnes = G.history.filter(h => !h.wild && !h.correct);
+  let meaning = 'Across three rounds, your results highlight opportunities where Heizen can reduce operational cost and planning cycle time.';
+  if (wrongOnes.length) {
+    meaning = `Your ${wrongOnes[0].seg.toLowerCase()} results point to a high-value opportunity. That's the first problem Heizen typically fixes for teams like yours.`;
+  }
+  document.getElementById('results-meaning').textContent = meaning;
+
+  // Rank
+  const myEntry = leaderboard.find(p => p.name === G.player.name && p.company === G.player.company && p.score === score);
+  const rank    = leaderboard.indexOf(myEntry) + 1;
+  document.getElementById('results-rank').textContent = `You ranked #${rank} today`;
+
+  showScreen('results');
+  setTimeout(() => animateCounter(score), 400);
+}
+
+function animateCounter(target) {
+  const el  = document.getElementById('results-score-num');
+  const dur = 1600;
+  const t0  = performance.now();
+  function frame(now) {
+    const t    = Math.min((now - t0) / dur, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(target * ease);
+    if (t < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+function addToLeaderboard() {
+  const best = G.history.reduce((a, b) => a.pts >= b.pts ? a : b, { seg: '—', pts: 0 });
+  leaderboard.push({ name: G.player.name, company: G.player.company, role: G.player.role, score: G.score, topSeg: best.seg });
+  leaderboard.sort((a, b) => b.score - a.score);
+  if (leaderboard.length > 10) leaderboard.length = 10;
+}
+
+/* ================================================================
+   LEADERBOARD
+   ================================================================ */
+
+let lbCountdown = null;
+
+function openLeaderboard() {
+  showScreen('leaderboard');
+  setTimeout(renderLeaderboard, 450);
+  startLBCountdown();
+}
+
+function renderLeaderboard() {
+  const el = document.getElementById('lb-rows');
+  if (!leaderboard.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--gray);font-size:28px;padding:60px;">No players yet — be the first to spin!</div>';
+    return;
+  }
+  el.innerHTML = leaderboard.map((p, i) => `
+    <div class="lb-row" id="lbr${i}">
+      <div class="lb-rank ${i===0?'gold':''}">${i===0?'🥇':'#'+(i+1)}</div>
+      <div class="lb-name">${esc(p.name)}</div>
+      <div class="lb-co">${esc(p.company)}</div>
+      <div class="lb-score">${p.score}</div>
+      <div class="lb-seg">${esc(p.topSeg)}</div>
+    </div>`).join('');
+  leaderboard.forEach((_, i) => {
+    setTimeout(() => { const r = document.getElementById('lbr'+i); if (r) r.classList.add('in'); }, i*110+80);
+  });
+}
+
+function startLBCountdown() {
+  clearInterval(lbCountdown);
+  let n = 10;
+  const footer = document.getElementById('lb-footer');
+  footer.textContent = `Returning to attract screen in ${n}s · Press any key to return now`;
+  lbCountdown = setInterval(() => {
+    n--;
+    footer.textContent = `Returning to attract screen in ${n}s · Press any key to return now`;
+    if (n <= 0) { clearInterval(lbCountdown); showScreen('attract'); }
+  }, 1000);
+}
+
+/* ================================================================
+   KEYBOARD SHORTCUTS
+   ================================================================ */
+
+document.addEventListener('keydown', e => {
+  // ESC → attract from anywhere
+  if (e.key === 'Escape') {
+    clearInterval(G.timerTick);
+    clearInterval(lbCountdown);
+    closeFR();
+    G = newGameState();
+    showScreen('attract');
+    return;
+  }
+
+  // R → full reset (no ctrl/cmd)
+  if ((e.key === 'r' || e.key === 'R') && !e.ctrlKey && !e.metaKey) {
+    clearInterval(G.timerTick);
+    clearInterval(lbCountdown);
+    closeFR();
+    leaderboard = [];
+    G = newGameState();
+    showScreen('attract');
+    return;
+  }
+
+  // L → leaderboard overlay
+  if ((e.key === 'l' || e.key === 'L') && !e.ctrlKey && !e.metaKey) {
+    clearInterval(G.timerTick);
+    closeFR();
+    openLeaderboard();
+    return;
+  }
+
+  // Any key on leaderboard → back to attract
+  if (currentScreen === 'leaderboard') {
+    clearInterval(lbCountdown);
+    showScreen('attract');
+  }
+});
+
+// Enter submits registration
+['reg-name','reg-company'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') startGame(); });
+});
+document.getElementById('reg-role').addEventListener('keydown', e => { if (e.key === 'Enter') startGame(); });
+
+/* ================================================================
+   HELPERS
+   ================================================================ */
+
+function esc(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ================================================================
+   INIT
+   ================================================================ */
+
+buildMetrics();
+startTypewriter();
+drawWheel(0);
+
+// Boot attract screen
+(function boot() {
+  const s = document.getElementById('screen-attract');
+  s.classList.add('active');
+  requestAnimationFrame(() => s.classList.add('visible'));
+})();
+
+</script>
+</body>
+</html>
